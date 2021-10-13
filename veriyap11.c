@@ -32,6 +32,7 @@ void basaEkle(int sayi)
 			start->prev=eleman;
 			eleman->next=start;
 			eleman->prev=start;
+			start=eleman;
 		}
 		else
 		{
@@ -49,9 +50,146 @@ void basaEkle(int sayi)
 		}
 	}
 }
+
+void sonaEkle(int sayi)
+{
+	struct node * eleman=(struct node *) malloc(sizeof(struct node));
+	eleman->data=sayi;
+	eleman->next=start;
+	if(start==NULL)
+	{
+		start=eleman;
+		start->next=start;
+		start->prev=start;
+	}
+	else
+	{
+		if(start->next==start)
+		{
+			start->next=eleman;
+			start->prev=eleman;
+			eleman->next=start;
+			eleman->prev=start;
+		}
+		else
+		{
+			temp=start;
+			while(temp->next!=start)
+			{
+				temp=temp->next;
+				
+			}
+			temp->next=eleman;
+			eleman->prev=temp;
+			eleman->next=start;
+			start->prev=eleman;
+		}
+	}
+}
+
+
+void sondanSil()
+{
+	if(start==NULL)
+	{
+		printf("liste bos. \n");
+	}
+	else
+	{
+		if(start->next==start)
+		{
+			free(start);
+			start=NULL;
+		}
+		else
+		{
+			temp=start;
+			while(temp->next!=start)
+			{
+				temp=temp->next;
+			}
+			temp2=start->next;
+			free(start);
+			temp->next=temp2;
+			temp2->prev=temp;
+			start=temp2;
+		}
+		
+	}
+	}
 	
+	void bastanSil()
+{
+	if(start==NULL)
+	{
+		printf("liste bos. \n");
+	}
+	else
+	{
+		if(start->next==start)
+		{
+			free(start);
+			start=NULL;
+		}
+		else
+		{
+			temp=start;
+			while(temp->next!=start)
+			{
+				temp=temp->next;
+			}
+			temp2=temp->prev;
+			free(temp);
+			temp2->next=start;
+			start->prev=temp;
+			
+		}
+		
+	}
+	}
+
+int elemanSay()
+{
+	int adet=0;
+	if(start==NULL)
+	{
+		return 0;
+	}
+	else
+	{
+		temp=start;
+		while(temp->next!=start)
+		{
+			adet++;
+			temp=temp->next;
+		}
+		adet++;
+		return adet;
+	}
+}
+
+int elemanToplam()
+{
+	int toplam=0;
+	if(start==NULL)
+	{
+		return 0;
+	}
+	else
+	{
+		temp=start;
+		while(temp->next!=start)
+		{
+			toplam+=temp->data;
+			temp=temp->next;
+		}
+		toplam+=temp->data;
+		return toplam;
+	}
+}	
 	void listele()
 	{
+		system("cls");
 		if(start==NULL)
 		{
 			printf("liste bos \n");
@@ -68,6 +206,7 @@ void basaEkle(int sayi)
 				printf("%d ",temp->data);
 		}
 	}
+	
 
 int main(){
 	
@@ -75,13 +214,15 @@ int main(){
 	
 	{
 		int sayi,secim;
-	printf("\n1--BasaEKle \n");
-	printf("2--SonaEkle \n");
-	printf("3--BasaEKle \n");
-	printf("4--BasaEKle \n");
-	printf("5--BasaEKle \n");
-	printf("6--listele \n");
-	printf("Seciminizi yapiniz \n");
+	printf("\n1--Basa EKle \n");
+	printf("2--Sona Ekle \n");
+	printf("3--Bastan Sil \n");
+	printf("4--Sondan Sil \n");
+	printf("5--Eleman Sayisi \n");
+	printf("6--Eleman Toplami \n");		printf("5--BasaEKle \n");
+	printf("7--listele \n");
+	printf("---Seciminizi yapiniz \n");
+	printf("0--- Cikis \n");
 
 
 	scanf("%d",&secim);
@@ -91,8 +232,21 @@ int main(){
 		scanf("%d",&sayi);
 		basaEkle(sayi);
 		break;
-		case 6:listele();
+		case 2:printf("sona eklenecek sayi");
+		scanf("%d",&sayi);
+		sonaEkle(sayi);
 		break;
+		case 3: bastanSil();
+		break;
+		case 4: sondanSil();
+		break;
+		case 5: printf("eleman adeti : %d ",elemanSay());
+		break;
+		case 6: printf("eleman toplami : %d ",elemanToplam());
+		break;
+		case 7:listele();
+		break;
+		case 0: exit(0);
 	}
 	}
 
