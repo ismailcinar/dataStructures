@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#define SIZE 10
+#define SIZE 10 //Specifying the maximum limit of the queue
+
 
 typedef struct
 {
@@ -14,9 +15,10 @@ element queue[SIZE];
 
     int front = -1;
     int rear  = -1;
-	int counter = 0;
+
 	int i;
 	bool result =false;
+	
 int enqueue(int data)
 {
 
@@ -26,65 +28,26 @@ int enqueue(int data)
 		return result;
 		
 	}
-	else if ((front == -1) && (rear == -1))
+	else 
 	{
-			front++;
-			rear++;
-			queue[rear].value = data;
-			printf("The element has been successfully added.\n");
-			result =true;
-			return result;
-		}
-		else 
-		  check(data);
+		if(front==-1) 
+		front=0; 
+		
 		rear++;
+		queue[rear].value = data;
+		printf("The element has been successfully added.\n");
+		result =true;
+		return result;
 		
-    
-		//	while(queue[counter].value < data && rear != SIZE)
-		//	{
-		//		if (counter < rear)
-		//		 {
-		//			for (i = rear; i >= counter; i--) 
-		//			{
-		//				queue[i+1].value = queue[i].value;
-		//				
-		//			}
-		//			
-		//			queue[counter].value = data;
-		//			rear++;
-		//			printf("The element has been successfully added.\n");
-		//		}
-			printf("The element has been successfully added.\n");		
-			}
-
 		
-int check(int data)
-{
-    int i,j;
- 	i = 0;
-    while ( i <= rear )
-    {
-        if (data >= queue[i].value)
-        {
-        	j = rear + 1;
-            while ( j > i )
-            {
-                   queue[j].value=queue[j-1].value;
-                   j--;
-            }
-            queue[i].value = data;
-            result=true;
-            return result ;
-        }
-    }
-    queue[i].value = data;
-    i++;
+	}
+	
 }
 
 
 void dequeue()
 {
-	if(front == -1 || front>rear)
+	if(front == -1 )//|| front>rear)
 	{
 		printf("Queue is empty.\n");
 		front = -1;
@@ -135,7 +98,10 @@ int main()
 		break;
 		case 1: printf("Enter the value to add : ");
 		scanf("%d", &number);
+
 		enqueue(number);
+		
+		
 		break;
 		case 2: dequeue();
 		break;
@@ -143,10 +109,6 @@ int main()
 		}
 		
 	}
-	
-	
-	
-	
 	
 	return 0;
 }

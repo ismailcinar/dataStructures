@@ -17,6 +17,7 @@ element queue[SIZE];
 	int counter = 0;
 	int i;
 	bool result =false;
+	
 int enqueue(int data)
 {
 
@@ -28,41 +29,33 @@ int enqueue(int data)
 	}
 	else if ((front == -1) && (rear == -1))
 	{
-			front++;
-			rear++;
-			queue[rear].value = data;
-			printf("The element has been successfully added.\n");
-			result =true;
-			return result;
-		}
-		else 
-		  check(data);
+		front++;
 		rear++;
+		queue[rear].value = data;
+		printf("The element has been successfully added.\n");
+		result =true;
+		return result;
+	}
+	else
+	{
+		check(data);
+		rear++;
+	}
+	   
+	
 		
     
-		//	while(queue[counter].value < data && rear != SIZE)
-		//	{
-		//		if (counter < rear)
-		//		 {
-		//			for (i = rear; i >= counter; i--) 
-		//			{
-		//				queue[i+1].value = queue[i].value;
-		//				
-		//			}
-		//			
-		//			queue[counter].value = data;
-		//			rear++;
-		//			printf("The element has been successfully added.\n");
-		//		}
-			printf("The element has been successfully added.\n");		
-			}
+	
+	printf("The element has been successfully added.\n");		
+}
 
 		
 int check(int data)
 {
-    int i,j;
- 	i = 0;
-    while ( i <= rear )
+    int i=0;
+	int j;
+ 
+    while (i <= rear)
     {
         if (data >= queue[i].value)
         {
@@ -76,9 +69,11 @@ int check(int data)
             result=true;
             return result ;
         }
+        i++;
     }
     queue[i].value = data;
-    i++;
+    result=true;
+    return result ;
 }
 
 
@@ -143,10 +138,6 @@ int main()
 		}
 		
 	}
-	
-	
-	
-	
 	
 	return 0;
 }
